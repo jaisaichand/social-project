@@ -1,0 +1,40 @@
+<div class="container">
+<div class="header">
+    <div class="headerFirst">
+        <img src="assets/book.jpg" alt="">
+        <span>Jai sai chand</span>
+    </div>
+    <div>...</div>
+</div>
+<div>
+    <p>{{postdata.Title}}</p>
+    <p>{{postdata.Subtitle}}</p>
+    <p>
+{{postdata.Description|slice:0:(postdata.Description.length>20&&seeMore==false)?20:postdata.Description.length}}
+<span style="color: blueviolet;cursor: pointer;" (click)="seeMore=true" *ngIf="seeMore==false&&postdata.Description.length>20">see more</span>
+    </p>
+    <div class="imgContainer">
+
+        <img src="assets/jkrowling.jpg" class="postImg" alt="">
+    </div>
+    
+</div>
+<div class="postFooter">
+    <div>
+        <img src="assets/heart.svg" alt="">
+    </div>
+    <div style="cursor: pointer;" (click)="openCommentBox()" >comment
+       <span *ngIf="postdata.Comments.length>0">({{postdata.Comments.length}})</span> 
+    </div>
+    <div>share</div>
+</div>
+<div class="commentsContainer" *ngIf="showCommentBox">
+    <div>
+        <input type="text" placeholder="enter your comment..." >
+        <button>submit</button>
+    </div>
+    <div *ngFor="let comm of postdata.Comments">
+        <app-comment [commentid]="comm" ></app-comment>
+    </div>
+</div>
+</div>
